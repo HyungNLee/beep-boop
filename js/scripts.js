@@ -57,7 +57,16 @@ function descending(array) {
   })
 }
 
-
+//Function to check if name has been entered.
+function isName(string) {
+  if (string) {
+    $("#userName").hide();
+    $("#nameChange").slideDown();
+    $("#userNumber").slideDown();
+  } else {
+    alert("Please enter a name.")
+  }
+}
 
 //Main function to call other functions
 function startClick(string, userName) {
@@ -77,9 +86,7 @@ $(document).ready(function() {
   $("#userName").submit(function(event) {
     event.preventDefault();
     inputName = $("#name").val();
-    $("#userName").hide();
-    $("#nameChange").slideDown();
-    $("#userNumber").slideDown();
+    isName(inputName);
   })
 
   $("#nameChange").click(function() {
