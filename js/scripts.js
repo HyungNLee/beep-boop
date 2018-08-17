@@ -15,36 +15,33 @@ function toNumArray(string) {
     numArray.push(fillNum);
     fillNum += 1;
   }
-  var finalArray = numConvert(numArray);
-  alert(finalArray);
-  return finalArray;
+  return numArray;
 }
 
 //Function to converts a number to either "Beep!", "Boop!", or "I'm sorry, 'username'. I'm afraid I can't do that"
-function numConvert(array) {
-  var convertedArray = [];
-  convertedArray = array.map(function(number) {
-    if (number > 0 && number % 3 === 0) {
-      return "I'm sorry, " + inputName + ". I'm afraid I can't do that."
-    }
-    if (number.toString().includes("1")) {
+function numConvert(array, userName) {
+  var convertedArray = array.map(function(number) {
+    if (number !== 0 && number % 3 === 0) {
+      return "I'm sorry, " + userName + ". I'm afraid I can't do that.";
+    } else if (number.toString().includes("1")) {
       return "Boop!";
     } else if (number.toString().includes("0")) {
       return "Beep!";
-    }
-    else {
+    } else {
       return number;
     }
   });
+  alert(convertedArray);
   return convertedArray;
 }
 
 //Main function to call other functions
-function startClick(string) {
+function startClick(string, userName) {
   if (isNotNumber(string)) {
     alert("Please enter a valid number!");
   } else {
-
+    var numArray = toNumArray(string);
+    var convertedArray = numConvert(numArray, userName);
   }
 }
 
@@ -59,6 +56,6 @@ $(document).ready(function() {
   $("#userNumber").submit(function(event) {
     event.preventDefault();
     var userInput = $("#numberBox").val();
-    toNumArray(userInput);
+    startClick(userInput, inputName);
   })
 })
