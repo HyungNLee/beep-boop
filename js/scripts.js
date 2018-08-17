@@ -31,8 +31,18 @@ function numConvert(array, userName) {
       return number;
     }
   });
-  alert(convertedArray);
   return convertedArray;
+}
+
+//Function to append convertedArray to output section in HTML.
+function appendResult(array) {
+  $("#result").text("");
+  var index = 0;
+  array.forEach(function(word) {
+    $("#result").append(index + " = " + word + "<br>");
+    index++;
+  })
+  $(".results").slideDown();
 }
 
 //Main function to call other functions
@@ -42,6 +52,7 @@ function startClick(string, userName) {
   } else {
     var numArray = toNumArray(string);
     var convertedArray = numConvert(numArray, userName);
+    appendResult(convertedArray);
   }
 }
 
