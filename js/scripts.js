@@ -61,7 +61,7 @@ function descending(array) {
 
 //Main function to call other functions
 function startClick(string, userName) {
-  if (isNotNumber(string)) {
+  if (isNotNumber(string) || !string) {
     alert("Please enter a valid number!");
   } else {
     var numArray = toNumArray(string);
