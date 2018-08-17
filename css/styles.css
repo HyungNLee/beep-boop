@@ -1,0 +1,12 @@
+.results, #nameChange, #userNumber {
+  display: none;
+}
+
+.well {
+  margin: 10px;
+}
+
+.well h2 {
+  text-align: center;
+  text-decoration: underline;
+}

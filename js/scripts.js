@@ -39,11 +39,25 @@ function appendResult(array) {
   $("#result").text("");
   var index = 0;
   array.forEach(function(word) {
-    $("#result").append(index + " = " + word + "<br>");
+    $("#result").append("<b>#" + index + "</b> = " + word + "<br>");
     index++;
   })
   $(".results").slideDown();
 }
+
+//Function to reverse order and print into result div.
+function descending(array) {
+  $("#result").text("");
+  var revArray = array.slice();
+  var revArray = revArray.reverse();
+  var index = revArray.length - 1;
+  revArray.forEach(function(word) {
+    $("#result").append("<b>#" + index + "</b> = " + word + "<br>");
+    index--;
+  })
+}
+
+
 
 //Main function to call other functions
 function startClick(string, userName) {
@@ -53,6 +67,7 @@ function startClick(string, userName) {
     var numArray = toNumArray(string);
     var convertedArray = numConvert(numArray, userName);
     appendResult(convertedArray);
+    return convertedArray;
   }
 }
 
@@ -62,11 +77,31 @@ $(document).ready(function() {
   $("#userName").submit(function(event) {
     event.preventDefault();
     inputName = $("#name").val();
+    $("#userName").hide();
+    $("#nameChange").slideDown();
+    $("#userNumber").slideDown();
+  })
+
+  $("#nameChange").click(function() {
+    $("#userName").slideDown();
+    $("#nameChange").hide();
+    $(".results").hide();
+    $("#userNumber").slideUp();
   })
 
   $("#userNumber").submit(function(event) {
     event.preventDefault();
     var userInput = $("#numberBox").val();
-    startClick(userInput, inputName);
+    var finishedArray = startClick(userInput, inputName);
+    $("#descend").click(function() {
+      descending(finishedArray);
+      $("#descend").hide();
+      $("#ascend").show();
+    })
+    $("#ascend").click(function() {
+      appendResult(finishedArray);
+      $("#descend").show();
+      $("#ascend").hide();
+    })
   })
 })
